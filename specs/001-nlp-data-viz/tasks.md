@@ -17,12 +17,12 @@
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create backend directory structure (src/api, src/models, src/services, src/utils, tests)
-- [ ] T002 Initialize Python environment (venv) and install dependencies (fastapi, uvicorn, pandas, openpyxl, nltk, python-multipart, pytest)
-- [ ] T003 Initialize frontend React project with Vite (TypeScript)
-- [ ] T004 [P] Install frontend dependencies (axios, recharts, vitest, @testing-library/react)
-- [ ] T005 [P] Configure backend linting/formatting (black, pylint)
-- [ ] T006 [P] Configure frontend linting/formatting (eslint, prettier)
+- [X] T001 Create backend directory structure (src/api, src/models, src/services, src/utils, tests)
+- [X] T002 Initialize Python environment (venv) and install dependencies (fastapi, uvicorn, pandas, openpyxl, nltk, python-multipart, pytest)
+- [X] T003 Initialize frontend React project with Vite (TypeScript)
+- [X] T004 [P] Install frontend dependencies (axios, recharts, vitest, @testing-library/react)
+- [X] T005 [P] Configure backend linting/formatting (black, pylint)
+- [X] T006 [P] Configure frontend linting/formatting (eslint, prettier)
 
 ## Phase 2: Foundational (Blocking Prerequisites)
 
@@ -30,11 +30,11 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T007 Implement Session Management Service (generate UUIDs, create temp dirs) in backend/src/services/session_service.py
-- [ ] T008 Implement File Storage Utility (save/load/delete files) in backend/src/utils/file_manager.py
-- [ ] T009 Define core Pydantic models (AnalysisSession, DatasetMetadata, ColumnMetadata) in backend/src/models/core.py
-- [ ] T010 Setup global exception handling and logging in backend/src/app.py
-- [ ] T011 [P] Create basic API client setup in frontend/src/services/api.ts
+- [X] T007 Implement Session Management Service (generate UUIDs, create temp dirs) in backend/src/services/session_service.py
+- [X] T008 Implement File Storage Utility (save/load/delete files) in backend/src/utils/file_manager.py
+- [X] T009 Define core Pydantic models (AnalysisSession, DatasetMetadata, ColumnMetadata) in backend/src/models/core.py
+- [X] T010 Setup global exception handling and logging in backend/src/app.py
+- [X] T011 [P] Create basic API client setup in frontend/src/services/api.ts
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -48,19 +48,19 @@
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T012 [P] [US1] Create unit test for file parsing service in backend/tests/unit/test_parsing_service.py
-- [ ] T013 [P] [US1] Create integration test for /upload endpoint in backend/tests/integration/test_upload_api.py
-- [ ] T014 [P] [US1] Create component test for FileUpload component in frontend/tests/components/FileUpload.test.tsx
+- [X] T012 [P] [US1] Create unit test for file parsing service in backend/tests/unit/test_parsing_service.py
+- [X] T013 [P] [US1] Create integration test for /upload endpoint in backend/tests/integration/test_upload_api.py
+- [X] T014 [P] [US1] Create component test for FileUpload component in frontend/tests/components/FileUpload.test.tsx
 
 ### Implementation for User Story 1
 
-- [ ] T015 [US1] Implement Data Parsing Service (read_csv/excel, extract metadata) in backend/src/services/parsing_service.py
-- [ ] T016 [US1] Implement /upload endpoint in backend/src/api/routes.py (using UploadResponse model)
-- [ ] T017 [US1] Implement /dataset/{session_id} endpoint in backend/src/api/routes.py
-- [ ] T018 [P] [US1] Create FileUpload component (drag & drop zone) in frontend/src/components/FileUpload.tsx
-- [ ] T019 [P] [US1] Create DataPreviewTable component in frontend/src/components/DataPreviewTable.tsx
-- [ ] T020 [US1] Integrate Upload and Preview components in frontend/src/pages/Dashboard.tsx
-- [ ] T021 [US1] Handle error states (invalid file type, parse errors) in frontend/src/components/FileUpload.tsx
+- [X] T015 [US1] Implement Data Parsing Service (read_csv/excel, extract metadata) in backend/src/services/parsing_service.py
+- [X] T016 [US1] Implement /upload endpoint in backend/src/api/routes.py (using UploadResponse model)
+- [X] T017 [US1] Implement /dataset/{session_id} endpoint in backend/src/api/routes.py
+- [X] T018 [P] [US1] Create FileUpload component (drag & drop zone) in frontend/src/components/FileUpload.tsx
+- [X] T019 [P] [US1] Create DataPreviewTable component in frontend/src/components/DataPreviewTable.tsx
+- [X] T020 [US1] Integrate Upload and Preview components in frontend/src/pages/Dashboard.tsx
+- [X] T021 [US1] Handle error states (invalid file type, parse errors) in frontend/src/components/FileUpload.tsx
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -72,19 +72,19 @@
 
 ### Tests for User Story 2 ⚠️
 
-- [ ] T022 [P] [US2] Create unit test for cleaning operations (drop, fillna, rename) in backend/tests/unit/test_cleaning_service.py
-- [ ] T023 [P] [US2] Create integration test for /clean endpoint in backend/tests/integration/test_clean_api.py
-- [ ] T024 [P] [US2] Create component test for ColumnSelector component in frontend/tests/components/ColumnSelector.test.tsx
+- [X] T022 [P] [US2] Create unit test for cleaning operations (drop, fillna, rename) in backend/tests/unit/test_cleaning_service.py
+- [X] T023 [P] [US2] Create integration test for /clean endpoint in backend/tests/integration/test_clean_api.py
+- [X] T024 [P] [US2] Create component test for ColumnSelector component in frontend/tests/components/ColumnSelector.test.tsx
 
 ### Implementation for User Story 2
 
-- [ ] T025 [US2] Define CleaningOperation model in backend/src/models/cleaning.py
-- [ ] T026 [US2] Implement Cleaning Service (apply transformations to pandas DF) in backend/src/services/cleaning_service.py
-- [ ] T027 [US2] Implement /dataset/{session_id}/clean endpoint in backend/src/api/routes.py
-- [ ] T028 [P] [US2] Create ColumnSelector sidebar component in frontend/src/components/ColumnSelector.tsx
-- [ ] T029 [P] [US2] Create CleaningToolbar component (rename, fill NA actions) in frontend/src/components/CleaningToolbar.tsx
-- [ ] T030 [US2] Wire up cleaning actions to API in frontend/src/pages/Dashboard.tsx
-- [ ] T031 [US2] Implement state refresh logic (re-fetch preview after clean) in frontend/src/hooks/useDataset.ts
+- [X] T025 [US2] Define CleaningOperation model in backend/src/models/cleaning.py
+- [X] T026 [US2] Implement Cleaning Service (apply transformations to pandas DF) in backend/src/services/cleaning_service.py
+- [X] T027 [US2] Implement /dataset/{session_id}/clean endpoint in backend/src/api/routes.py
+- [X] T028 [P] [US2] Create ColumnSelector sidebar component in frontend/src/components/ColumnSelector.tsx
+- [X] T029 [P] [US2] Create CleaningToolbar component (rename, fill NA actions) in frontend/src/components/CleaningToolbar.tsx
+- [X] T030 [US2] Wire up cleaning actions to API in frontend/src/pages/Dashboard.tsx
+- [X] T031 [US2] Implement state refresh logic (re-fetch preview after clean) in frontend/src/hooks/useDataset.ts
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
