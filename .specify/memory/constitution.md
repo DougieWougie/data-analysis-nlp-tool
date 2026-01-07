@@ -1,50 +1,40 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+- Version Change: 1.0.0 (Initial Ratification)
+- Modified Principles:
+  - I. Insight-Driven Analytics (New)
+  - II. React Frontend Standard (New)
+  - III. Natural Language Processing (New)
+  - IV. Test-Driven Development (New)
+  - V. Continuous Refactoring (New)
+- Templates requiring updates:
+  - .specify/templates/tasks-template.md (⚠ pending - update to enforce TDD mandate)
+-->
+# TechDebt Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Insight-Driven Analytics
+Applications must focus on deriving and presenting actionable insights from data, rather than merely displaying raw records. Features should enable users to understand "why" and "so what" behind the data through visualization, summarization, and trend analysis.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. React Frontend Standard
+All frontend user interfaces must be developed using the React ecosystem. This ensures a unified component architecture, promotes code reuse, and leverages established patterns for state management and interactivity.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Natural Language Processing (NLP) Integration
+Applications must implement Natural Language Processing (NLP) capabilities to enhance user interaction and data analysis. This includes interpreting user intent, analyzing unstructured text, or generating natural language summaries of data insights.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Test-Driven Development (TDD)
+(NON-NEGOTIABLE) Tests must be written before any implementation code. The Red-Green-Refactor cycle is strictly enforced: write a failing test, write the minimum code to pass it, then refactor. Pull requests without prior test coverage will be rejected.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
-
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
-
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Continuous Refactoring
+To combat technical debt, code must be continuously refactored for clarity, modularity, and simplicity. Every feature implementation should leave the codebase cleaner than it was found, prioritizing maintainability over quick hacks.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+### Amendment Process
+This Constitution supersedes all other project practices. Amendments require a formal Pull Request with justification, peer approval, and a corresponding update to the version number.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+### Compliance
+All design documents, implementation plans, and code reviews must verify compliance with these principles. Deviations must be explicitly justified and documented as technical debt to be resolved immediately.
+
+**Version**: 1.0.0 | **Ratified**: 2026-01-07 | **Last Amended**: 2026-01-07
