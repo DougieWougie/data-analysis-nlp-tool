@@ -1,0 +1,204 @@
+openapi: 3.0.3
+info:
+  title: Data Analysis & NLP API
+  version: 1.0.0
+  description: API for uploading, cleaning, visualizing, and analyzing tabular data.
+paths:
+  /api/v1/upload:
+    post:
+      summary: Upload a dataset
+      operationId: uploadDataset
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Session created and file parsed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponse'
+
+  /api/v1/dataset/{session_id}:
+    get:
+      summary: Get current dataset state (metadata & preview)
+      operationId: getDataset
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Dataset metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetMetadata'
+
+  /api/v1/dataset/{session_id}/clean:
+    post:
+      summary: Apply cleaning operations
+      operationId: cleanDataset
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CleaningOperation'
+      responses:
+        '200':
+          description: Data cleaned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetMetadata'
+
+  /api/v1/dataset/{session_id}/suggestions:
+    get:
+      summary: Get visualization suggestions
+      operationId: getSuggestions
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: List of suggestions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VisualizationSuggestion'
+
+  /api/v1/dataset/{session_id}/sentiment:
+    post:
+      summary: Perform sentiment analysis
+      operationId: analyzeSentiment
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                target_column:
+                  type: string
+      responses:
+        '200':
+          description: Analysis complete, dataset updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetMetadata'
+
+  /api/v1/dataset/{session_id}/export:
+    get:
+      summary: Export dataset as CSV
+      operationId: exportDataset
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: CSV file download
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+
+components:
+  schemas:
+    UploadResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+          format: uuid
+        metadata:
+          $ref: '#/components/schemas/DatasetMetadata'
+
+    DatasetMetadata:
+      type: object
+      properties:
+        row_count:
+          type: integer
+        column_count:
+          type: integer
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ColumnMetadata'
+        preview:
+          type: array
+          items:
+            type: object
+
+    ColumnMetadata:
+      type: object
+      properties:
+        name:
+          type: string
+        data_type:
+          type: string
+          enum: [Numerical, Categorical, DateTime, Text, Boolean]
+        missing_count:
+          type: integer
+
+    CleaningOperation:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [DROP_COLUMNS, RENAME_COLUMN, DROP_NA, FILL_NA, CAST_TYPE]
+        params:
+          type: object
+
+    VisualizationSuggestion:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [BAR, LINE, SCATTER, PIE, HISTOGRAM]
+        title:
+          type: string
+        x_axis:
+          type: string
+        y_axis:
+          type: string
+        description:
+          type: string
