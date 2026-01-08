@@ -11,9 +11,15 @@ interface DataPreviewTableProps {
   columns: Column[];
   preview: Record<string, any>[];
   rowCount: number;
+  onAnalyzeSentiment?: (columnName: string) => void;
 }
 
-const DataPreviewTable = ({ columns, preview, rowCount }: DataPreviewTableProps) => {
+const DataPreviewTable = ({ columns, preview, rowCount, onAnalyzeSentiment }: DataPreviewTableProps) => {
+  const handleSentimentClick = (columnName: string) => {
+    if (onAnalyzeSentiment) {
+      onAnalyzeSentiment(columnName);
+    }
+  };
   if (!columns || columns.length === 0) {
     return null;
   }
@@ -34,10 +40,21 @@ const DataPreviewTable = ({ columns, preview, rowCount }: DataPreviewTableProps)
               {columns.map((col) => (
                 <th key={col.name}>
                   <div className="column-header">
-                    <span className="column-name">{col.name}</span>
-                    <span className="column-type">{col.data_type}</span>
-                    {col.missing_count > 0 && (
-                      <span className="missing-badge">{col.missing_count} missing</span>
+                    <div className="column-info">
+                      <span className="column-name">{col.name}</span>
+                      <span className="column-type">{col.data_type}</span>
+                      {col.missing_count > 0 && (
+                        <span className="missing-badge">{col.missing_count} missing</span>
+                      )}
+                    </div>
+                    {col.data_type === 'Text' && onAnalyzeSentiment && (
+                      <button
+                        className="sentiment-btn"
+                        onClick={() => handleSentimentClick(col.name)}
+                        title={`Analyze sentiment for ${col.name}`}
+                      >
+                        🔍 Sentiment
+                      </button>
                     )}
                   </div>
                 </th>
@@ -114,6 +131,12 @@ const DataPreviewTable = ({ columns, preview, rowCount }: DataPreviewTableProps)
         .column-header {
           display: flex;
           flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .column-info {
+          display: flex;
+          flex-direction: column;
           gap: 0.25rem;
         }
 
@@ -127,6 +150,28 @@ const DataPreviewTable = ({ columns, preview, rowCount }: DataPreviewTableProps)
           font-size: 0.75rem;
           font-weight: normal;
           text-transform: capitalize;
+        }
+
+        .sentiment-btn {
+          padding: 0.35rem 0.75rem;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          color: white;
+          border: none;
+          border-radius: 4px;
+          font-size: 0.75rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s;
+          white-space: nowrap;
+        }
+
+        .sentiment-btn:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .sentiment-btn:active {
+          transform: translateY(0);
         }
 
         .missing-badge {

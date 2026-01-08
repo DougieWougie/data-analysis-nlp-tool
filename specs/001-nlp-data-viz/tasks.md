@@ -96,18 +96,18 @@
 
 ### Tests for User Story 3 ⚠️
 
-- [ ] T032 [P] [US3] Create unit test for suggestion logic (heuristic rules) in backend/tests/unit/test_suggestion_service.py
-- [ ] T033 [P] [US3] Create integration test for /suggestions endpoint in backend/tests/integration/test_suggestions_api.py
-- [ ] T034 [P] [US3] Create component test for ChartRenderer in frontend/tests/components/ChartRenderer.test.tsx
+- [X] T032 [P] [US3] Create unit test for suggestion logic (heuristic rules) in backend/tests/unit/test_suggestion_service.py
+- [X] T033 [P] [US3] Create integration test for /suggestions endpoint in backend/tests/integration/test_suggestions_api.py
+- [X] T034 [P] [US3] Create component test for ChartRenderer in frontend/tests/components/ChartRenderer.test.tsx
 
 ### Implementation for User Story 3
 
-- [ ] T035 [US3] Define VisualizationSuggestion model in backend/src/models/visualization.py
-- [ ] T036 [US3] Implement Suggestion Service (generate configs based on column types) in backend/src/services/suggestion_service.py
-- [ ] T037 [US3] Implement /dataset/{session_id}/suggestions endpoint in backend/src/api/routes.py
-- [ ] T038 [P] [US3] Create ChartRenderer component (using Recharts) in frontend/src/components/ChartRenderer.tsx
-- [ ] T039 [P] [US3] Create SuggestionsPanel component (list of recommended charts) in frontend/src/components/SuggestionsPanel.tsx
-- [ ] T040 [US3] Implement chart selection and rendering logic in frontend/src/pages/Dashboard.tsx
+- [X] T035 [US3] Define VisualizationSuggestion model in backend/src/models/visualization.py
+- [X] T036 [US3] Implement Suggestion Service (generate configs based on column types) in backend/src/services/suggestion_service.py
+- [X] T037 [US3] Implement /dataset/{session_id}/suggestions endpoint in backend/src/api/routes.py
+- [X] T038 [P] [US3] Create ChartRenderer component (using Recharts) in frontend/src/components/ChartRenderer.tsx
+- [X] T039 [P] [US3] Create SuggestionsPanel component (list of recommended charts) in frontend/src/components/SuggestionsPanel.tsx
+- [X] T040 [US3] Implement chart selection and rendering logic in frontend/src/pages/Dashboard.tsx
 
 **Checkpoint**: All user stories should now be independently functional
 
@@ -119,18 +119,18 @@
 
 ### Tests for User Story 4 ⚠️
 
-- [ ] T041 [P] [US4] Create unit test for NLTK sentiment wrapper in backend/tests/unit/test_nlp_service.py
-- [ ] T042 [P] [US4] Create integration test for /sentiment endpoint in backend/tests/integration/test_nlp_api.py
-- [ ] T043 [P] [US4] Create component test for SentimentAnalysisAction in frontend/tests/components/SentimentAction.test.tsx
+- [X] T041 [P] [US4] Create unit test for NLTK sentiment wrapper in backend/tests/unit/test_nlp_service.py
+- [X] T042 [P] [US4] Create integration test for /sentiment endpoint in backend/tests/integration/test_nlp_api.py
+- [X] T043 [P] [US4] Create component test for SentimentAnalysisAction in frontend/tests/components/SentimentAction.test.tsx
 
 ### Implementation for User Story 4
 
-- [ ] T044 [US4] Implement NLP Service (VADER initialization, apply to column) in backend/src/services/nlp_service.py
-- [ ] T045 [US4] Implement /dataset/{session_id}/sentiment endpoint in backend/src/api/routes.py
-- [ ] T046 [US4] Implement /dataset/{session_id}/export endpoint for downloading results in backend/src/api/routes.py
-- [ ] T047 [P] [US4] Add "Analyze Sentiment" button to column headers in frontend/src/components/DataPreviewTable.tsx
-- [ ] T048 [P] [US4] Create SentimentDistributionChart component in frontend/src/components/SentimentDistributionChart.tsx
-- [ ] T049 [US4] Add Export button to UI in frontend/src/components/CleaningToolbar.tsx
+- [X] T044 [US4] Implement NLP Service (VADER initialization, apply to column) in backend/src/services/nlp_service.py
+- [X] T045 [US4] Implement /dataset/{session_id}/sentiment endpoint in backend/src/api/routes.py
+- [X] T046 [US4] Implement /dataset/{session_id}/export endpoint for downloading results in backend/src/api/routes.py
+- [X] T047 [P] [US4] Add "Analyze Sentiment" button to column headers in frontend/src/components/DataPreviewTable.tsx
+- [X] T048 [P] [US4] Create SentimentDistributionChart component in frontend/src/components/SentimentDistributionChart.tsx
+- [X] T049 [US4] Add Export button to UI in frontend/src/components/CleaningToolbar.tsx
 
 **Checkpoint**: Full feature set complete.
 
@@ -138,8 +138,8 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T050 [P] Update Quickstart guide with any new setup steps in specs/001-nlp-data-viz/quickstart.md
-- [ ] T051 Refactor backend routes to use APIRouter for better organization
+- [X] T050 [P] Update Quickstart guide with any new setup steps in specs/001-nlp-data-viz/quickstart.md
+- [X] T051 Refactor backend routes to use APIRouter for better organization
 - [ ] T052 Optimize Recharts rendering for larger datasets (memoization)
 - [ ] T053 [P] Add global loading states/spinners in frontend/src/components/LoadingOverlay.tsx
 - [ ] T054 [P] Implement proper error toast notifications in frontend/src/App.tsx

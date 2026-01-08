@@ -1,10 +1,14 @@
 /**
  * Main dashboard page
  */
+import { useState, useEffect } from 'react';
 import FileUpload from '../components/FileUpload';
 import DataPreviewTable from '../components/DataPreviewTable';
 import ColumnSelector from '../components/ColumnSelector';
 import CleaningToolbar from '../components/CleaningToolbar';
+import SuggestionsPanel from '../components/SuggestionsPanel';
+import ChartRenderer from '../components/ChartRenderer';
+import SentimentDistributionChart from '../components/SentimentDistributionChart';
 import { useDataset } from '../hooks/useDataset';
 import api from '../services/api';
 
@@ -17,6 +21,14 @@ interface DatasetMetadata {
     missing_count: number;
   }>;
   preview: Record<string, any>[];
+}
+
+interface VisualizationSuggestion {
+  type: 'BAR' | 'LINE' | 'SCATTER' | 'PIE' | 'HISTOGRAM';
+  title: string;
+  x_axis?: string;
+  y_axis?: string;
+  description: string;
 }
 
 const Dashboard = () => {
@@ -33,6 +45,32 @@ const Dashboard = () => {
     dropNA,
     castType,
   } = useDataset();
+
+  const [suggestions, setSuggestions] = useState<VisualizationSuggestion[]>([]);
+  const [selectedSuggestion, setSelectedSuggestion] = useState<VisualizationSuggestion | null>(null);
+  const [suggestionsLoading, setSuggestionsLoading] = useState(false);
+
+  // Fetch suggestions when session changes
+  useEffect(() => {
+    if (sessionId) {
+      fetchSuggestions();
+    }
+  }, [sessionId, metadata]); // Re-fetch when metadata changes (after cleaning)
+
+  const fetchSuggestions = async () => {
+    if (!sessionId) return;
+
+    setSuggestionsLoading(true);
+    try {
+      const response = await api.get(`/api/v1/dataset/${sessionId}/suggestions`);
+      setSuggestions(response.data);
+    } catch (err) {
+      console.error('Failed to fetch suggestions:', err);
+      setSuggestions([]);
+    } finally {
+      setSuggestionsLoading(false);
+    }
+  };
 
   const handleUploadSuccess = (newSessionId: string, newMetadata: DatasetMetadata) => {
     setSessionId(newSessionId);
@@ -103,6 +141,21 @@ const Dashboard = () => {
     }
   };
 
+  const handleAnalyzeSentiment = async (columnName: string) => {
+    if (!sessionId) return;
+
+    try {
+      const response = await api.post(`/api/v1/dataset/${sessionId}/sentiment`, {
+        target_column: columnName
+      });
+
+      // Update metadata with the new sentiment columns
+      setMetadata(response.data);
+    } catch (err) {
+      console.error('Failed to analyze sentiment:', err);
+    }
+  };
+
   return (
     <div className="dashboard">
       <header className="dashboard-header">
@@ -158,13 +211,36 @@ const Dashboard = () => {
                   onDropNA={handleDropNA}
                   onExport={handleExport}
                 />
+                <SuggestionsPanel
+                  suggestions={suggestions}
+                  onSelectSuggestion={setSelectedSuggestion}
+                  loading={suggestionsLoading}
+                />
               </aside>
 
               <main className="main-content">
+                {selectedSuggestion && (
+                  <div className="visualization-section">
+                    <ChartRenderer
+                      suggestion={selectedSuggestion}
+                      data={metadata.preview}
+                    />
+                  </div>
+                )}
+
+                {/* Show sentiment distribution if sentiment columns exist */}
+                {metadata.columns.some(col => col.name.endsWith('_sentiment')) && (
+                  <SentimentDistributionChart
+                    data={metadata.preview}
+                    sentimentColumn={metadata.columns.find(col => col.name.endsWith('_sentiment'))!.name}
+                  />
+                )}
+
                 <DataPreviewTable
                   columns={metadata.columns}
                   preview={metadata.preview}
                   rowCount={metadata.row_count}
+                  onAnalyzeSentiment={handleAnalyzeSentiment}
                 />
               </main>
             </div>
@@ -269,6 +345,16 @@ const Dashboard = () => {
 
         .main-content {
           min-width: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+        }
+
+        .visualization-section {
+          background: white;
+          border-radius: 8px;
+          padding: 0;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         @media (max-width: 1024px) {
